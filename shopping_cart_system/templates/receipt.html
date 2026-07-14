@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Receipt</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',
+filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="receipt">
+
+<h1>SHOPPING MART</h1>
+
+<p>Lucknow, Uttar Pradesh</p>
+
+<p>Phone : +91 7800959999</p>
+
+<hr>
+
+<p>
+
+<b>Invoice No :</b>
+
+INV-{{ invoice }}
+
+</p>
+
+<p>
+
+<b>Date :</b>
+
+{{ date.strftime("%d-%m-%Y") }}
+
+</p>
+
+<p>
+
+<b>Time :</b>
+
+{{ date.strftime("%I:%M %p") }}
+
+</p>
+
+<hr>
+
+<table>
+
+<tr>
+
+<th>Product</th>
+
+<th>Qty</th>
+
+<th>Price</th>
+
+<th>Total</th>
+
+</tr>
+
+{% for item in cart %}
+
+<tr>
+
+<td>{{ item.name }}</td>
+
+<td>{{ item.qty }}</td>
+
+<td>₹{{ item.price }}</td>
+
+<td>
+
+₹{{ item.price*item.qty }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<hr>
+
+<p>
+
+Subtotal :
+
+₹{{ "{:,.2f}".format(subtotal) }}
+
+</p>
+
+<p>
+
+GST (18%) :
+
+₹{{ "{:,.2f}".format(gst) }}
+
+</p>
+
+<h2>
+
+Grand Total :
+
+₹{{ "{:,.2f}".format(grand) }}
+
+</h2>
+
+<hr>
+
+<h3>
+
+Payment Status :
+<span style="color:green">
+
+PAID
+
+</span>
+
+</h3>
+
+<h2>
+
+Thank You For Shopping 
+
+</h2>
+
+<button onclick="window.print()">
+
+🖨 Print Receipt
+
+</button>
+
+<br><br>
+
+<a href="/">
+
+Back to Dashboard
+
+</a>
+
+</div>
+
+</body>
+
+</html>

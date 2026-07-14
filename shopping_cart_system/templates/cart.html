@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="title">Shopping Cart</h1>
+
+{% if cart %}
+
+<table class="cart-table">
+
+<tr>
+    <th>Image</th>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>Action</th>
+</tr>
+
+{% for item in cart %}
+
+<tr>
+
+<td>
+
+<img class="cart-img"
+src="{{ url_for('static', filename='images/' + item.image) }}">
+
+</td>
+
+<td>{{ item.name }}</td>
+
+<td>₹{{ "{:,}".format(item.price) }}</td>
+
+<td>
+
+<a class="qty-btn" href="/decrease/{{ item.id }}">-</a>
+
+{{ item.qty }}
+
+<a class="qty-btn" href="/increase/{{ item.id }}">+</a>
+
+</td>
+
+<td>
+
+₹{{ "{:,}".format(item.price*item.qty) }}
+
+</td>
+
+<td>
+
+<a class="delete-btn"
+href="/remove/{{ item.id }}">
+
+Remove
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<div class="bill">
+
+<h2>Bill Summary</h2>
+
+<p>Subtotal :
+<b>₹{{ "{:,.2f}".format(subtotal) }}</b></p>
+
+<p>GST (18%) :
+<b>₹{{ "{:,.2f}".format(gst) }}</b></p>
+
+<hr>
+
+<h2>
+
+Grand Total :
+
+₹{{ "{:,.2f}".format(grand) }}
+
+</h2>
+
+<div class="bill-buttons">
+
+<a href="/receipt" class="receipt-btn">
+
+Generate Receipt
+
+</a>
+
+<a href="/empty" class="empty-btn">
+
+Empty Cart
+
+</a>
+
+</div>
+
+</div>
+
+{% else %}
+
+<h2 style="text-align:center">
+
+🛒 Your Cart is Empty
+
+</h2>
+
+{% endif %}
+
+{% endblock %}

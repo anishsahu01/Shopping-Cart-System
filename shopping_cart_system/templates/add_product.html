@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="title">Add New Product</h1>
+
+<div class="form-box">
+
+<form method="POST">
+
+<label>Product Name</label>
+<input type="text" name="name" required>
+
+<label>Price</label>
+<input type="number" name="price" required>
+
+<label>Stock</label>
+<input type="number" name="stock" required>
+
+<label>Image Name</label>
+<input
+type="text"
+name="image"
+placeholder="Example: laptop.jpg"
+required>
+
+<br><br>
+
+<button type="submit" class="save-btn">
+Add Product
+</button>
+
+<a href="/" class="cancel-btn">
+Cancel
+</a>
+
+</form>
+
+</div>
+
+{% endblock %}

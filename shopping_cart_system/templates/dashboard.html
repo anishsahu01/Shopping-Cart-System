@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="title">
+    Dashboard
+</h1>
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search Product..."
+        class="search">
+
+    <button class="search-btn">
+        Search
+    </button>
+
+</form>
+
+
+<div class="cards">
+
+<div class="card">
+
+<h2>{{ products|length }}</h2>
+
+<p>Total Products</p>
+
+</div>
+
+<div class="card">
+
+<h2>{{ cart_count }}</h2>
+
+<p>Items in Cart</p>
+
+</div>
+
+</div>
+
+
+<div class="product-grid">
+
+{% for product in products %}
+
+<div class="product">
+
+<img src="{{ url_for('static',
+filename='images/' + product.image) }}">
+
+<h3>{{ product.name }}</h3>
+
+<p class="price">
+
+₹{{ "{:,}".format(product.price) }}
+
+</p>
+
+<p>
+
+Stock : {{ product.stock }}
+
+</p>
+
+<div class="buttons">
+
+<a href="/add_to_cart/{{ product.id }}"
+class="add">
+Add to Cart
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
